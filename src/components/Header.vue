@@ -9,20 +9,13 @@ export default {
 
 <template>
   <header>
-    <div class="navbar mx-3">
-      <div class="left-buttons">
-        <ul class="d-flex">
-          <li><button>Add</button></li>
-          <li><button>Add</button></li>
-        </ul>
-      </div>
-
+    <div class="navbar mx-3 d-flex flex-column">
       <h1>Travel Plan</h1>
 
       <div class="right-buttons">
-        <ul class="d-flex">
-          <li><button>Add</button></li>
-          <li><button>Add</button></li>
+        <ul class="d-flex gap-5">
+          <li><button>Add a trip</button></li>
+          <li><button>Plan a trip</button></li>
         </ul>
       </div>
     </div>
