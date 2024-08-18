@@ -1,4 +1,7 @@
 <script>
+import AddTrip from "./AddTrip.vue";
+import { RouterLink } from "vue-router";
+
 export default {
   name: "Header",
   data() {
@@ -14,8 +17,16 @@ export default {
 
       <div class="right-buttons">
         <ul class="d-flex gap-5 list-unstyled">
-          <li><button>Add a trip</button></li>
-          <li><button>Plan a trip</button></li>
+          <li>
+            <router-link :to="{ name: 'add' }" class="btn btn-primary">
+              Add a trip
+            </router-link>
+          </li>
+          <li>
+            <router-link :to="{ name: 'plan' }" class="btn btn-success">
+              Plan a trip
+            </router-link>
+          </li>
         </ul>
       </div>
     </div>
