@@ -1,8 +1,17 @@
 <script>
+import axios from "axios";
+import { state } from "../state";
+
 export default {
   name: "Home",
   data() {
-    return {};
+    return {
+      state,
+    };
+  },
+  mounted() {
+    this.state.getTrips(this.state.tripsApiUrl);
+    this.state.getPlans(this.state.plansApiUrl);
   },
 };
 </script>
@@ -38,14 +47,9 @@ export default {
               </tr>
             </thead>
             <tbody>
-              <tr class="">
-                <td scope="row">London</td>
-                <td>19/10/98</td>
-                <td>Open <i class="fa fa-eye" aria-hidden="true"></i></td>
-              </tr>
-              <tr class="">
-                <td scope="row">London</td>
-                <td>19/10/98</td>
+              <tr v-for="trip in state.past_trips" class="">
+                <td scope="row">{{ trip.destination }}</td>
+                <td>from {{ trip.departure_date }} to {{ trip.return_date }}</td>
                 <td>Open <i class="fa fa-eye" aria-hidden="true"></i></td>
               </tr>
             </tbody>
@@ -81,14 +85,9 @@ export default {
               </tr>
             </thead>
             <tbody>
-              <tr class="">
-                <td scope="row">London</td>
-                <td>19/10/98</td>
-                <td>Open <i class="fa fa-eye" aria-hidden="true"></i></td>
-              </tr>
-              <tr class="">
-                <td scope="row">London</td>
-                <td>19/10/98</td>
+              <tr v-for="plan in state.plans" class="">
+                <td scope="row">{{ plan.destination }}</td>
+                <td>from {{ plan.departure_date }} to {{ plan.return_date }}</td>
                 <td>Open <i class="fa fa-eye" aria-hidden="true"></i></td>
               </tr>
             </tbody>

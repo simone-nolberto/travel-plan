@@ -1,5 +1,4 @@
 <script>
-import AddTrip from "./AddTrip.vue";
 import { RouterLink } from "vue-router";
 
 export default {
