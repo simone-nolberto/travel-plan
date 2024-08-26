@@ -51,15 +51,26 @@ export default {
           <ul>
             <li v-for="stage in trip.itinerary">
               <strong>{{ stage.day }}</strong>
-              <ul>
-                <li v-for="activity in stage.activities">
-                  {{ activity.name }}, at {{ activity.time }}
-                </li>
-              </ul>
+              <div class="table-responsive">
+                <table class="table table-primary">
+                  <thead>
+                    <tr>
+                      <th scope="col">To do</th>
+                      <th scope="col">When</th>
+                      <th scope="col">Where</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="activity in stage.activities" class="">
+                      <td scope="row">{{ activity.name }}</td>
+                      <td>{{ activity.time }}</td>
+                      <td>{{ activity.location }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </li>
           </ul>
-
-          <h5>Take a look at what you've done on the map</h5>
         </div>
       </div>
     </main>

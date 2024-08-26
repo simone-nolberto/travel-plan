@@ -28,7 +28,7 @@ export default {
 <template>
   <main class="container">
     <h2 class="text-center">
-      Here you can find details about your plan to visit {{ plan.destination }}
+      Here you can find details of your plan for {{ plan.destination }}!
     </h2>
 
     <main class="container my-4">
@@ -46,20 +46,46 @@ export default {
         </div>
 
         <div class="col">
-          <h5>Your activities</h5>
+          <div class="block-header d-flex gap-5 align-items-center">
+            <h5>Your activities</h5>
+
+            <button class="btn btn-success">Add a stage to your plan</button>
+          </div>
 
           <ul>
             <li v-for="stage in plan.itinerary">
               <strong>{{ stage.day }}</strong>
-              <ul>
-                <li v-for="activity in stage.activities">
-                  {{ activity.name }}, at {{ activity.time }}
-                </li>
-              </ul>
+              <div class="table-responsive">
+                <table class="table table-success">
+                  <thead>
+                    <tr>
+                      <th scope="col">To do</th>
+                      <th scope="col">When</th>
+                      <th scope="col">Where</th>
+                      <th scope="col">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="activity in stage.activities" class="">
+                      <td scope="row">{{ activity.name }}</td>
+                      <td>{{ activity.time }}</td>
+                      <td>{{ activity.location }}</td>
+
+                      <td class="d-flex gap-2">
+                        <button class="btn btn-primary">
+                          <i class="fa-solid fa-check"></i>
+                        </button>
+                        <button class="btn btn-danger">
+                          <i class="fa-solid fa-trash"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <button class="btn btn-success">Add an activity to this day</button>
+              </div>
             </li>
           </ul>
-
-          <h5>Take a look at what you've done on the map</h5>
         </div>
       </div>
     </main>
