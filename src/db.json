@@ -1,7 +1,7 @@
 {
     "past_trips": [
         {
-            "trip_id": 1,
+            "id": 1,
             "destination": "Firenze, Italia",
             "departure_date": "2023-05-15",
             "return_date": "2023-05-20",
@@ -53,7 +53,7 @@
             ]
         },
         {
-            "trip_id": 2,
+            "id": 2,
             "destination": "Venezia, Italia",
             "departure_date": "2023-06-10",
             "return_date": "2023-06-14",
@@ -107,7 +107,7 @@
     ],
     "plans": [
         {
-            "plan_id": 1,
+            "id": 1,
             "destination": "Roma, Italia",
             "departure_date": "2024-09-10",
             "return_date": "2024-09-17",
@@ -154,7 +154,7 @@
             ]
         },
         {
-            "plan_id": 2,
+            "id": 2,
             "destination": "Parigi, Francia",
             "departure_date": "2024-10-01",
             "return_date": "2024-10-07",

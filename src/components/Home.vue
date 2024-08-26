@@ -19,7 +19,7 @@ export default {
 <template>
   <main class="container">
     <div class="row">
-      <div class="col">
+      <div class="col-12 col-md-6">
         <div>
           <div class="mb-3">
             <label for="" class="form-label">Trip or vacation</label>
@@ -49,15 +49,25 @@ export default {
             <tbody>
               <tr v-for="trip in state.past_trips" class="">
                 <td scope="row">{{ trip.destination }}</td>
-                <td>from {{ trip.departure_date }} to {{ trip.return_date }}</td>
-                <td>Open <i class="fa fa-eye" aria-hidden="true"></i></td>
+                <td>{{ trip.departure_date }}/{{ trip.return_date }}</td>
+                <td>
+                  <router-link
+                    :to="{
+                      name: 'trip_details',
+                      params: { id: trip.id },
+                    }"
+                    class="btn btn-primary"
+                  >
+                    <i class="fa fa-eye" aria-hidden="true"></i>
+                  </router-link>
+                </td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
 
-      <div class="col">
+      <div class="col-12 col-md-6">
         <div>
           <div class="mb-3">
             <label for="" class="form-label">Plan</label>
@@ -87,8 +97,18 @@ export default {
             <tbody>
               <tr v-for="plan in state.plans" class="">
                 <td scope="row">{{ plan.destination }}</td>
-                <td>from {{ plan.departure_date }} to {{ plan.return_date }}</td>
-                <td>Open <i class="fa fa-eye" aria-hidden="true"></i></td>
+                <td>{{ plan.departure_date }}/{{ plan.return_date }}</td>
+                <td>
+                  <router-link
+                    :to="{
+                      name: 'plan_details',
+                      params: { id: plan.id },
+                    }"
+                    class="btn btn-success"
+                  >
+                    <i class="fa fa-eye" aria-hidden="true"></i>
+                  </router-link>
+                </td>
               </tr>
             </tbody>
           </table>
