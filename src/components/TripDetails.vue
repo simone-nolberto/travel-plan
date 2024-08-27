@@ -19,7 +19,7 @@ export default {
     },
   },
   mounted() {
-    console.log(this.$route);
+    // console.log(this.$route);
     this.getCurrentTrip(`${this.state.tripsApiUrl}/${this.$route.params.id}`);
   },
 };

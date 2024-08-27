@@ -8,6 +8,8 @@ export default {
     return {
       state,
       plan: "",
+      newStage: "",
+      error: "",
     };
   },
   methods: {
@@ -17,23 +19,76 @@ export default {
         this.plan = response.data;
       });
     },
+
+    addStage() {
+      let plan = this.plan;
+      let itinerary = this.plan.itinerary;
+
+      if (this.newStage != "") {
+        const newStage = { day: this.newStage, activities: [] };
+
+        let updatedPlan = JSON.stringify({ plan });
+
+        // console.log(updatedPlan);
+
+        axios.get().then((response) => {
+          this.plans = [];
+          console.log(this.plans);
+
+          axios({
+            method: "post",
+            url: this.state.plansApiUrl,
+            data: this.plans,
+          })
+            .then(function (response) {
+              console.log(response);
+            })
+            .catch(function (response) {
+              console.log(response);
+            });
+
+          this.plans = response.data;
+          console.log(this.plans);
+
+          this.plans[0].itinerary.push(newStage);
+
+          console.log(this.plans[0].itinerary);
+
+          // axios({
+          //   method: "post",
+          //   url: this.state.plansApiUrl,
+          //   data: this.plans,
+          // })
+          //   .then(function (response) {
+          //     console.log(response);
+          //   })
+          //   .catch(function (response) {
+          //     console.log(response);
+          //   });
+        });
+      } else {
+        this.error = "You must insert a date";
+        alert(this.error);
+      }
+      this.newStage = "";
+    },
   },
   mounted() {
-    console.log(this.$route);
+    // console.log(this.$route);
     this.getCurrentPlan(`${this.state.plansApiUrl}/${this.$route.params.id}`);
   },
 };
 </script>
 
 <template>
-  <main class="container">
+  <main class="container min-vh-100">
     <h2 class="text-center">
       Here you can find details of your plan for {{ plan.destination }}!
     </h2>
 
     <main class="container my-4">
       <div class="row">
-        <div class="col">
+        <div class="col-12 col-md-6">
           <div>
             <h5>
               The trip is set from {{ plan.departure_date }} to {{ plan.return_date }},
@@ -45,11 +100,32 @@ export default {
           </div>
         </div>
 
-        <div class="col">
-          <div class="block-header d-flex gap-5 align-items-center">
-            <h5>Your activities</h5>
+        <div class="col-12 col-md-6 overflow-y-scroll">
+          <h5>Your activities</h5>
 
-            <button class="btn btn-success">Add a stage to your plan</button>
+          <div class="mb-3">
+            <form></form>
+            <label for="day" class="form-label">New stage</label>
+            <input
+              type="date"
+              class="form-control"
+              name="day"
+              id="day"
+              v-model="this.newStage"
+              aria-describedby="helpId"
+              placeholder=""
+            />
+            <small id="helpId" class="form-text text-muted"
+              >Add a stage to your plan</small
+            >
+
+            <button
+              v-on:click="addStage(this.$route.params.id)"
+              type="submit"
+              class="btn btn-primary"
+            >
+              Add
+            </button>
           </div>
 
           <ul>
@@ -82,7 +158,19 @@ export default {
                     </tr>
                   </tbody>
                 </table>
-                <button class="btn btn-success">Add an activity to this day</button>
+
+                <div class="mb-3">
+                  <label for="" class="form-label">To do</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name=""
+                    id=""
+                    aria-describedby="helpId"
+                    placeholder=""
+                  />
+                  <small id="helpId" class="form-text text-muted">Add an activity</small>
+                </div>
               </div>
             </li>
           </ul>

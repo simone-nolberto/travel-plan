@@ -10,8 +10,8 @@ export default {
     };
   },
   mounted() {
-    this.state.getTrips(this.state.tripsApiUrl);
-    this.state.getPlans(this.state.plansApiUrl);
+    // this.state.getTrips(this.state.tripsApiUrl);
+    // this.state.getPlans(this.state.plansApiUrl);
   },
 };
 </script>

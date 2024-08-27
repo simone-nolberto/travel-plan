@@ -13,7 +13,7 @@ export const state = reactive({
     getTrips(url) {
         axios.get(url)
             .then(response => {
-                console.log(response.data);
+                // console.log(response.data);
                 this.past_trips = response.data;
                 // console.log(this.past_trips);
             })
@@ -22,7 +22,7 @@ export const state = reactive({
     getPlans(url) {
         axios.get(url)
             .then(response => {
-                console.log(response.data);
+                // console.log(response.data);
                 this.plans = response.data;
                 // console.log(this.plans);
             })

@@ -1,14 +1,19 @@
 <script>
 import { RouterLink } from "vue-router";
+import { state } from "../state";
 
 export default {
   name: "Header",
   data() {
-    return {};
+    return {
+      state,
+    };
   },
 
   mounted() {
-    console.log(this.$route);
+    // console.log(this.$route);
+    this.state.getTrips(this.state.tripsApiUrl);
+    this.state.getPlans(this.state.plansApiUrl);
   },
 };
 </script>
