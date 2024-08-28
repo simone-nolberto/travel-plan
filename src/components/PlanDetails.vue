@@ -9,6 +9,9 @@ export default {
       state,
       plan: "",
       newStage: "",
+      newActivityName: "",
+      newActivityTime: "",
+      newActivityLocation: "",
       error: "",
     };
   },
@@ -21,56 +24,77 @@ export default {
     },
 
     addStage() {
-      let plan = this.plan;
-      let itinerary = this.plan.itinerary;
+      // let plan = this.plan;
+
+      // console.log(this.plan.itinerary.length);
 
       if (this.newStage != "") {
-        const newStage = { day: this.newStage, activities: [] };
+        const newStageToAdd = {
+          stage_id: this.plan.itinerary.length + 1,
+          day: this.newStage,
+          activities: [],
+        };
+        this.plan.itinerary.push(newStageToAdd);
+        console.log(this.plan);
 
-        let updatedPlan = JSON.stringify({ plan });
-
-        // console.log(updatedPlan);
-
-        axios.get().then((response) => {
-          this.plans = [];
-          console.log(this.plans);
-
-          axios({
-            method: "post",
-            url: this.state.plansApiUrl,
-            data: this.plans,
+        axios({
+          method: "PUT",
+          url: `${this.state.plansApiUrl}/${this.$route.params.id}`,
+          data: this.plan,
+          content_type: JSON,
+        })
+          .then(function (response) {
+            console.log(response, url);
           })
-            .then(function (response) {
-              console.log(response);
-            })
-            .catch(function (response) {
-              console.log(response);
-            });
-
-          this.plans = response.data;
-          console.log(this.plans);
-
-          this.plans[0].itinerary.push(newStage);
-
-          console.log(this.plans[0].itinerary);
-
-          // axios({
-          //   method: "post",
-          //   url: this.state.plansApiUrl,
-          //   data: this.plans,
-          // })
-          //   .then(function (response) {
-          //     console.log(response);
-          //   })
-          //   .catch(function (response) {
-          //     console.log(response);
-          //   });
-        });
+          .catch(function (response) {
+            console.log(response);
+          });
       } else {
         this.error = "You must insert a date";
         alert(this.error);
       }
       this.newStage = "";
+    },
+
+    addActivity(stage) {
+      // console.log(stage);
+      let plan = this.plan;
+
+      // console.log(this.plan.itinerary[stage.stage_id - 1]);
+      if (this.newActivityName != "") {
+        const newActivityToAdd = {
+          activity_id: this.plan.itinerary.length + 1,
+          name: this.newActivityName,
+          time: this.newActivityTime,
+          location: this.newActivityLocation,
+        };
+
+        console.log(newActivityToAdd);
+        console.log(this.plan.itinerary[stage.stage_id - 1]);
+
+        // this.plan.itinerary[stage.id].push(newActivityToAdd);
+
+        // console.log(this.stage, newActivityToAdd);
+
+        // axios({
+        //   method: "PUT",
+        //   url: `${this.state.plansApiUrl}/${this.$route.params.id}`,
+        //   data: this.newActivityToAdd,
+        //   content_type: JSON,
+        // })
+        //   .then(function (response) {
+        //     console.log(response, url);
+        //   })
+        //   .catch(function (response) {
+        //     console.log(response);
+        //   });
+      } else {
+        this.error = "You must specify the name of the new activity";
+        alert(this.error);
+      }
+      // this.newActivityName = "";
+      // this.newActivityTime = "";
+      // this.newActivityLocation = "";
     },
   },
   mounted() {
@@ -103,34 +127,36 @@ export default {
         <div class="col-12 col-md-6 overflow-y-scroll">
           <h5>Your activities</h5>
 
-          <div class="mb-3">
-            <form></form>
-            <label for="day" class="form-label">New stage</label>
-            <input
-              type="date"
-              class="form-control"
-              name="day"
-              id="day"
-              v-model="this.newStage"
-              aria-describedby="helpId"
-              placeholder=""
-            />
-            <small id="helpId" class="form-text text-muted"
-              >Add a stage to your plan</small
-            >
+          <form>
+            <div class="mb-3">
+              <label for="day" class="form-label">New stage</label>
+              <input
+                type="date"
+                class="form-control"
+                name="day"
+                id="day"
+                v-model="this.newStage"
+                aria-describedby="helpId"
+                placeholder=""
+              />
+              <small id="helpId" class="form-text text-muted"
+                >Add a stage to your plan</small
+              >
 
-            <button
-              v-on:click="addStage(this.$route.params.id)"
-              type="submit"
-              class="btn btn-primary"
-            >
-              Add
-            </button>
-          </div>
+              <button
+                v-on:click="addStage(this.$route.params.id)"
+                type="submit"
+                class="btn btn-primary"
+              >
+                Add
+              </button>
+            </div>
+          </form>
 
           <ul>
             <li v-for="stage in plan.itinerary">
               <strong>{{ stage.day }}</strong>
+
               <div class="table-responsive">
                 <table class="table table-success">
                   <thead>
@@ -160,17 +186,57 @@ export default {
                 </table>
 
                 <div class="mb-3">
-                  <label for="" class="form-label">To do</label>
+                  <label for="activity_name" class="form-label">To do</label>
                   <input
                     type="text"
                     class="form-control"
-                    name=""
-                    id=""
+                    name="activity_name"
+                    id="activity_name"
+                    v-model="this.newActivityName"
                     aria-describedby="helpId"
                     placeholder=""
                   />
-                  <small id="helpId" class="form-text text-muted">Add an activity</small>
+                  <small id="helpId" class="form-text text-muted"
+                    >What do you want to do?</small
+                  >
                 </div>
+                <div class="mb-3">
+                  <label for="activity_time" class="form-label">When</label>
+                  <input
+                    type="time"
+                    class="form-control"
+                    name="activity_time"
+                    id="activity_time"
+                    v-model="this.newActivityTime"
+                    aria-describedby="helpId"
+                    placeholder=""
+                  />
+                  <small id="helpId" class="form-text text-muted">When?</small>
+                </div>
+
+                <div class="mb-3">
+                  <label for="activity_location" class="form-label">When</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="activity_location"
+                    id="activity_location"
+                    v-model="this.newActivityLocation"
+                    aria-describedby="helpId"
+                    placeholder=""
+                  />
+                  <small id="helpId" class="form-text text-muted">Where?</small>
+                </div>
+
+                <button
+                  v-on:click="addActivity(stage)"
+                  type="submit"
+                  class="btn btn-primary"
+                >
+                  Add
+                </button>
+
+                <form></form>
               </div>
             </li>
           </ul>

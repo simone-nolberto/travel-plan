@@ -11,6 +11,7 @@
       ],
       "itinerary": [
         {
+          "stage_id": 1,
           "day": "2023-05-16",
           "activities": [
             {
@@ -31,6 +32,7 @@
           ]
         },
         {
+          "stage_id": 2,
           "day": "2023-05-17",
           "activities": [
             {
@@ -63,6 +65,7 @@
       ],
       "itinerary": [
         {
+          "stage_id": 1,
           "day": "2023-06-11",
           "activities": [
             {
@@ -83,6 +86,7 @@
           ]
         },
         {
+          "stage_id": 2,
           "day": "2023-06-12",
           "activities": [
             {
@@ -117,19 +121,23 @@
       ],
       "itinerary": [
         {
+          "stage_id": 1,
           "day": "2024-09-11",
           "activities": [
             {
+              "activity_id": 1,
               "name": "Visita al Colosseo",
               "time": "09:00",
               "location": "Colosseo, Roma"
             },
             {
+              "activity_id": 2,
               "name": "Pranzo a Trastevere",
               "time": "13:00",
               "location": "Trastevere, Roma"
             },
             {
+              "activity_id": 3,
               "name": "Passeggiata a Villa Borghese",
               "time": "16:00",
               "location": "Villa Borghese, Roma"
@@ -137,14 +145,17 @@
           ]
         },
         {
+          "stage_id": 2,
           "day": "2024-09-12",
           "activities": [
             {
+              "activity_id": 1,
               "name": "Visita ai Musei Vaticani",
               "time": "10:00",
               "location": "Musei Vaticani, Roma"
             },
             {
+              "activity_id": 2,
               "name": "Cena al Ristorante La Pergola",
               "time": "20:00",
               "location": "La Pergola, Roma"
@@ -164,14 +175,17 @@
       ],
       "itinerary": [
         {
+          "stage_id": 1,
           "day": "2024-10-02",
           "activities": [
             {
+              "activity_id": 1,
               "name": "Visita alla Torre Eiffel",
               "time": "09:30",
               "location": "Torre Eiffel, Parigi"
             },
             {
+              "activity_id": 2,
               "name": "Visita al Louvre",
               "time": "14:00",
               "location": "Museo del Louvre, Parigi"
@@ -179,14 +193,17 @@
           ]
         },
         {
+          "stage_id": 2,
           "day": "2024-10-03",
           "activities": [
             {
+              "activity_id": 1,
               "name": "Giro in battello sulla Senna",
               "time": "11:00",
               "location": "Fiume Senna, Parigi"
             },
             {
+              "activity_id": 2,
               "name": "Visita a Montmartre",
               "time": "15:00",
               "location": "Montmartre, Parigi"
@@ -194,7 +211,6 @@
           ]
         }
       ]
-    },
-    []
+    }
   ]
 }
