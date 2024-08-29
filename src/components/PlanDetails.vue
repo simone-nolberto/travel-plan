@@ -57,11 +57,13 @@ export default {
     },
 
     addActivity(stage) {
-      // console.log(stage);
-      let plan = this.plan;
+      let stageToUpdate = stage;
 
-      // console.log(this.plan.itinerary[stage.stage_id - 1]);
-      if (this.newActivityName != "") {
+      if (
+        this.newActivityName != "" &&
+        this.newActivityTime != "" &&
+        this.newActivityLocation != ""
+      ) {
         const newActivityToAdd = {
           activity_id: this.plan.itinerary.length + 1,
           name: this.newActivityName,
@@ -69,12 +71,16 @@ export default {
           location: this.newActivityLocation,
         };
 
+        console.log(stageToUpdate);
+
         console.log(newActivityToAdd);
-        console.log(this.plan.itinerary[stage.stage_id - 1]);
 
-        // this.plan.itinerary[stage.id].push(newActivityToAdd);
+        // stage.push(newActivityToAdd);
 
-        // console.log(this.stage, newActivityToAdd);
+        // console.log(stage);
+
+        // this.plan.itinerary[stage.stage_id].push(newActivityToAdd);
+        // console.log(this.plan);
 
         // axios({
         //   method: "PUT",
@@ -89,7 +95,7 @@ export default {
         //     console.log(response);
         //   });
       } else {
-        this.error = "You must specify the name of the new activity";
+        this.error = "You must specify name, location and time of the new activity";
         alert(this.error);
       }
       // this.newActivityName = "";
@@ -215,7 +221,7 @@ export default {
                 </div>
 
                 <div class="mb-3">
-                  <label for="activity_location" class="form-label">When</label>
+                  <label for="activity_location" class="form-label">Where is it?</label>
                   <input
                     type="text"
                     class="form-control"
